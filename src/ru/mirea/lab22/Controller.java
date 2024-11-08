@@ -22,6 +22,9 @@ public class Controller {
             numBtns[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    if (model.expression.length() > 0 &&
+                            !Character.isDigit(e.getActionCommand().charAt(0)) &&
+                            !Character.isDigit(model.expression.trim().charAt(model.expression.trim().length()-1))) return;
                     model.expression += e.getActionCommand();
                     view.strTxt.setText(model.expression);
                 }
@@ -53,6 +56,7 @@ public class Controller {
         view.spaceBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (model.expression.endsWith(" ")) return;
                 model.expression += " ";
                 view.strTxt.setText(model.expression);
             }
